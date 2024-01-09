@@ -16,7 +16,7 @@ def teardown_module():
 client = TestClient(app)
 
 # Setup: Create a test owner
-id_owner = "1000000000"
+id_owner = "0"
 test_owner = Owner(IdOwner=id_owner, Name="John Doe", Address="039 Broad Av", Photo="http://photo_url1", Birthday="20-01-1990")
 
 def test_create_owner():
@@ -32,6 +32,6 @@ def test_get_owner_by_id():
     #Action: Send a test request to get a owner by id
     response = client.get("api/owners/"+id_owner)
 
-    # Assertion: Check if the owner was created successfully
+    # Assertion: Check if the owner is in the response
     assert response.status_code == 200
     assert response.json() == test_owner.model_dump()
