@@ -13,7 +13,7 @@ This a **CRU API** designed to handle REST petitions to **create, read and updat
    % source env/bin/activate
 4. **Install the requirements**
 
-   % pip install -r requirements.txt
+   % pip3 install -r requirements.txt
 6. **Run the tests**
 
    % pytest
