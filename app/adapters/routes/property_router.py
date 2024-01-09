@@ -44,7 +44,7 @@ async def create_property(property:Property) -> Property:
     else:
         raise HTTPException(status_code=404, detail="Owner not found")
     
-@property_router.post(upload_image, status_code=status.HTTP_204_NO_CONTENT)
+@property_router.post(upload_image)
 async def add_property_image(id_property_image:str,id_property:str,enabled: bool,file:UploadFile = File(...)):
     done=await property_use_case.add_property_image(id_property_image=id_property_image,id_property=id_property,file=file, enabled=enabled)
     return getResponse(done, "Property not found")

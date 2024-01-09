@@ -1,4 +1,5 @@
 # tests/test_property_router.py
+import os
 from fastapi.testclient import TestClient
 from main import app
 from app.adapters.databases.property_database import MongoDBPropertyRepository
@@ -13,6 +14,7 @@ def setup_module():
 def teardown_module():
     # Clear the in-memory database after all tests are executed
     MongoDBPropertyRepository.client.drop_database('test_database')
+
 
 
 client = TestClient(app)
@@ -31,11 +33,11 @@ id_owner = "1000000000"
 test_owner = Owner(IdOwner=id_owner, Name="John Doe", Address="039 Broad Av", Photo="http://photo_url1", Birthday="20-01-1990")
 
 # Setup: Create a test property
-test_property1 = Property(IdProperty="101", Name="Galaoro", Address="123 Main St", Price="10", CodeInternal="1607", Year="2022", Owner=id_owner)
+test_property1 = Property(IdProperty="101", Name="test1", Address="123 Main St", Price="10", CodeInternal="1607", Year="2022", Owner=id_owner)
 
 # Setup: Create a test property in the database
 id_property2="102"
-test_property2 = Property(IdProperty=id_property2, Name="Theseus", Address="456 Oak Ave", Price="10", CodeInternal="1808", Year="2020", Owner=id_owner)
+test_property2 = Property(IdProperty=id_property2, Name="test2", Address="456 Oak Ave", Price="10", CodeInternal="1808", Year="2020", Owner=id_owner)
 
 def test_create_property():
     
@@ -76,3 +78,36 @@ def test_update_property_price():
     # Assertion: Check if the property has the new price
     assert response.status_code == 200
     assert response.json()["Price"] == new_price
+
+def test_add_property_image():
+    # Arrange
+    response = client.post("/api/properties/", headers={"Content-Type": "application/json"},json=test_property1.model_dump())
+
+    file_path = "tests/test.png"
+    
+    with open(file_path, "rb") as file:
+        file_content = file.read()
+
+    files = {"file": ("test.png", file_content, "image/png")}
+
+    # Act
+    response = client.post(
+        "/api/properties/image-upload/",
+        params={"id_property_image": "0", "id_property": "101", "enabled": True},
+        files=files,
+        headers={"accept": "multipart/form-data"},
+    )
+
+    files = os.listdir("static/images/")
+    matching_files = [file for file in files if "test" in file]
+
+    assert response.status_code == 200
+    assert len(matching_files) > 0
+
+     # Cleanup
+    for file in matching_files:
+        os.remove(f"static/images/{file}")
+
+    # Assert that the file has been removed
+    for file in matching_files:
+        assert not os.path.exists(f"static/images/{file}")
