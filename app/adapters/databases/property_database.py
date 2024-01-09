@@ -1,12 +1,9 @@
 # mongodb_repositories.py
-from mongoengine import connect
 from fastapi import UploadFile
 from app.core.repositories.property_repository import PropertyRepository
 from app.adapters.databases.entities.property_entity import PropertyEntity
 from app.adapters.databases.entities.property_image_entity import PropertyImageEntity
 from app.utils.save_picture import save_picture
-
-# connect('my_mongodb', host='mongodb://localhost:27017/my_mongodb')
 
 class MongoDBPropertyRepository(PropertyRepository):
 
@@ -21,7 +18,6 @@ class MongoDBPropertyRepository(PropertyRepository):
         return new_property
 
     def update_property_price(self, property_entity:PropertyEntity) -> PropertyEntity:
-        # property_entity = self.get_property_by_id(property_id)
         if property_entity:
             return property_entity.save()
         return None

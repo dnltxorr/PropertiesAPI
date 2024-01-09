@@ -1,7 +1,5 @@
 # controllers.py
-from fastapi import APIRouter, status, Depends, HTTPException, File, UploadFile
-from typing import List
-# from adapters.databases.entities.property_entity import PropertyEntity
+from fastapi import APIRouter, HTTPException, File, UploadFile
 from app.core.models.property import Property
 from app.adapters.schemas.serializers import list_property_serializer, property_serializer, property_image_serializer
 from app.utils.utils import getResponse

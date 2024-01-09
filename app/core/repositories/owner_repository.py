@@ -1,7 +1,5 @@
 # repositories.py
 from abc import ABC, abstractmethod
-from typing import List
-from fastapi import UploadFile
 from app.adapters.databases.entities.owner_entity import OwnerEntity
 
 class OwnerRepository(ABC):

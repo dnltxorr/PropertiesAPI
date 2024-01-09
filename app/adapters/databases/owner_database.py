@@ -1,9 +1,6 @@
 # mongodb_repositories.py
-from mongoengine import connect
 from app.core.repositories.owner_repository import OwnerRepository
 from app.adapters.databases.entities.owner_entity import OwnerEntity
-
-# connect('my_mongodb', host='mongodb://localhost:27017/my_mongodb')
 
 class MongoDBOwnerRepository(OwnerRepository):
     
