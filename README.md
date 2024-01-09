@@ -7,6 +7,10 @@ This a **CRU API** designed to handle REST petitions to **create, read and updat
 2. **Create a virtual environment**
 
    % python -m venv env
+
+3. **Activate the virtual environment**
+
+   % source env/bin/activate
 4. **Install the requirements**
 
    % pip install -r requirements.txt
