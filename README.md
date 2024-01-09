@@ -5,14 +5,18 @@ This a **CRU API** designed to handle REST petitions to **create, read and updat
 
 1. **Clone the repository**
 2. **Create a virtual environment**
-    % python -m venv env
-3. **Install the requirements**
-    % pip install -r requirements.txt
-4. **Run the tests**
-    % pytest
-5. **Run the API**
-    % python main.py
-6. **Enjoy**
+
+   % python -m venv env
+4. **Install the requirements**
+
+   % pip install -r requirements.txt
+6. **Run the tests**
+
+   % pytest
+8. **Run the API**
+
+   % python main.py
+10. **Enjoy**
 
 You can access the API in your browser using the url:
     http://127.0.0.1:8000/
