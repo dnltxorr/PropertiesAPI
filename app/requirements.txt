@@ -1,0 +1,10 @@
+fastapi
+uvicorn
+pydantic
+python-multipart
+Pillow
+mongoengine
+pytest 
+pytest-asyncio 
+httpx 
+mongomock
